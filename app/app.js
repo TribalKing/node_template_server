@@ -13,7 +13,7 @@ const Dependencies = require('./Dependencies.js');
 /**
  * WebSocket - Listening WebSockets (configuration info in config.js file)
  */
-const websocket = require('./WebSocket.js');
+const Websocket = require('./WebSocket.js');
 
 /**
  * API - Including all controllers and models for API calls

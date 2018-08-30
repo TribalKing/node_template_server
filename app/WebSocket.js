@@ -28,7 +28,7 @@ ws = new WebSocket('ws://' + config.db.host + ':' + config.websocket.port);
 
 // event emmited when connected
 ws.onopen = function () {
-  console.log('websocket is connected ...');
+  console.log('Websockets working!');
 
   // sending a send event to websocket server
   ws.send('connected');

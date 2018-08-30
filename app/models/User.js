@@ -1,7 +1,7 @@
 /**
  * User Model
  */
- let Schema = mongoose.Schema;
+ const Schema = mongoose.Schema;
 
  const users = new Schema({
  	email: {
@@ -30,7 +30,7 @@
  * Hashing a password before saving it to the database
  */
 users.pre('save', function (next) {
-  var user = this;
+  let user = this;
   bcrypt.hash(user.password, 10, function (err, hash){
     if (err) {
       return next(err);
@@ -49,7 +49,7 @@ users.statics.authenticate = function (email, password, callback) {
       if (err) {
         return callback(err);
       } else if (!user) {
-        var err = new Error('User not found.');
+        let err = new Error('User not found.');
         err.status = 401;
         return callback(err);
       }

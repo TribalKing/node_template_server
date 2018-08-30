@@ -1,7 +1,7 @@
 /**
  * Country Model
  */
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const countries = new Schema({
     name: {
