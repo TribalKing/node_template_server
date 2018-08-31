@@ -1,7 +1,7 @@
 /**
  * BodyParser - For parsing of JSON from requests
  */
-bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -16,7 +16,7 @@ bcrypt = require('bcrypt');
 /**
  * Session - For tracking logins
  */
-session = require('express-session');
+const session = require('express-session');
 
 app.use(session({
   secret: 'there is no spoon',
