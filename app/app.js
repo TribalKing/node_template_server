@@ -2,8 +2,8 @@ const express = require('express');
 
 app = module.exports = express();
 
-config 	    = require('./config/config');
-const db 	= require('./config/db');
+config = require('./config/config');
+const db = require('./config/db');
 
 /**
  * Dependencies - Including all dependencies needed for app

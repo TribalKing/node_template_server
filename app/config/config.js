@@ -4,7 +4,7 @@
 const config = {
     app: {
         port: 8089
-    },    
+    },
     websocket: {
         port: 8088
     },

@@ -1,15 +1,20 @@
 /**
  * Country Model
  */
-const Schema = mongoose.Schema;
+class Country {
+    constructor() {
+        const Schema = mongoose.Schema;
 
-const countries = new Schema({
-    name: {
-        type: mongoose.Schema.Types.Mixed,
-        required: true,
+        const countries = new Schema({
+            name: {
+                type: mongoose.Schema.Types.Mixed,
+                required: true,
+            }
+        });
+
+        this.countryModel = mongoose.model('Country', countries);
     }
-});
 
-const Country = mongoose.model('Country', countries);
+}
 
-module.exports = Country;
+module.exports = new Country();

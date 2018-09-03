@@ -17,13 +17,13 @@ wss = new WebSocket.Server({
         // Other options settable:
         clientNoContextTakeover: true, // Defaults to negotiated value.
         serverNoContextTakeover: true, // Defaults to negotiated value.
-        clientMaxWindowBits: 10,       // Defaults to negotiated value.
-        serverMaxWindowBits: 10,       // Defaults to negotiated value.
+        clientMaxWindowBits: 10, // Defaults to negotiated value.
+        serverMaxWindowBits: 10, // Defaults to negotiated value.
 
         // Below options specified as default values.
-        concurrencyLimit: 10,          // Limits zlib concurrency for perf.
-        threshold: 1024,               // Size (in bytes) below which messages
-                                       // should not be compressed.
+        concurrencyLimit: 10, // Limits zlib concurrency for perf.
+        threshold: 1024, // Size (in bytes) below which messages
+        // should not be compressed.
     }
 });
 
@@ -32,15 +32,11 @@ wss = new WebSocket.Server({
  */
 WebSockets = {};
 
-wss.on('connection', function (ws) {
+wss.on('connection', function(ws) {
 
-    ws.on('message', function (message) {
+    ws.on('message', function(message) {
         console.log(message);
     });
-    // setInterval (
-    //     () => ws.send(`${new Date()}`),
-    //     1000
-    // );
 
 });
 
