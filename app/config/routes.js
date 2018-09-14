@@ -5,78 +5,71 @@ class Route {
 
     constructor() {
         this.User = {
-                users: '/api/users',
-                login: '/api/users/login',
-                logout: '/api/users/logout',
-                current: '/api/users/current',
-            },
+            users: '/api/users',
+            login: '/api/users/login',
+            logout: '/api/users/logout',
+            current: '/api/users/current',
+        };
 
-            this.Country = {
-                countries: '/api/countries',
-            }
+        this.Country = {
+            countries: '/api/countries',
+        };
+
+        this.app = require('../App');
     }
 
+    /**
+     * Routes for countries
+     */
     countryRoutes() {
         const countries = require('../controllers/CountryController.js');
 
-        /**
-         * Create a new country
-         */
-        app.post(this.Country.countries, function(req, res) {
+        // * Create a new country
+        this.app.post(this.Country.countries, function(req, res) {
             countries.create(req, res);
         });
 
-        /**
-         * Get all countries
-         */
-        app.get(this.Country.countries, function(req, res) {
+        // * Get all countries
+        this.app.get(this.Country.countries, function(req, res) {
             countries.getAll(req, res);
         });
     };
 
+    /**
+     * Routes for users
+     */
     userRoutes() {
         const users = require('../controllers/UserController.js');
 
-        /**
-         * Test if api is working
-         */
-        app.get('/', function(req, res) {
+        // * Test if api is working
+        this.app.get('/', function(req, res) {
             users.test(req, res);
         });
 
-        /**
-         * Get all users
-         */
-        app.get(this.User.users, function(req, res) {
+        // * Get all users
+        this.app.get(this.User.users, function(req, res) {
             users.getAll(req, res);
         });
 
-        /**
-         * Get all currently logged in users
-         */
-        app.get(this.User.current, function(req, res) {
+        // * Get all currently logged in users
+        this.app.get(this.User.current, function(req, res) {
             users.getAllLoggedUsers(req, res);
 
         });
 
-        /**
-         * Create new user
-         */
-        app.post(this.User.users, function(req, res) {
+        // * Create new user
+        this.app.post(this.User.users, function(req, res) {
             users.create(req, res);
         });
 
-        /**
-         * Login user
-         */
-        app.post(this.User.login, function(req, res, next) {
+        // * Login user
+        this.app.post(this.User.login, function(req, res, next) {
+            console.log(req.body);
             users.loginUser(req, res);
         });
 
-        /**
-         * Logout user
-         */
-        app.get(this.User.logout, function(req, res, next) {
+        // * Logout user
+        this.app.get(this.User.logout, function(req, res, next) {
             users.logoutUser(req, res);
         });
 

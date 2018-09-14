@@ -1,20 +1,26 @@
+const Model = require('./Model');
+
 /**
- * Country Model
+ * Country model 
+ *
+ * Needed fields adding to Schema for mongo db.
+ * 
  */
-class Country {
+class Country extends Model {
     constructor() {
-        const Schema = mongoose.Schema;
+        super();
+        const Schema = this.mongoose.Schema;
 
         const countries = new Schema({
             name: {
-                type: mongoose.Schema.Types.Mixed,
+                type: this.mongoose.Schema.Types.Mixed,
                 required: true,
             }
         });
 
-        this.countryModel = mongoose.model('Country', countries);
+        this.countryModel = this.mongoose.model('Country', countries);
     }
 
 }
 
-module.exports = new Country();
+module.exports = Country;

@@ -1,18 +1,38 @@
 /**
- * Config
+ * Class config contains all info needed for the app
+ * ports for node server and websocket server, and db configuration.
+ * Also requiring mongo db, which is used for storing all the data
  */
-const config = {
-    app: {
-        port: 8089
-    },
-    websocket: {
-        port: 8088
-    },
-    db: {
-        host: 'localhost',
-        port: 27017,
-        name: 'db'
-    }
-};
+class Config {
+    constructor() {
+            this.app = {
+                port: 8089
+            };
 
-module.exports = config;
+            this.websocket = {
+                port: 8088
+            };
+
+            this.db = {
+                host: 'localhost',
+                port: 27017,
+                name: 'db'
+            };
+    }
+
+    /**
+     * Database
+     */
+    Db() {
+        const mongoose = require('mongoose');
+
+        // connection to db
+        const connectionString = `mongodb://${this.db.host}:${this.db.port}/${this.db.name}`;
+        mongoose.connect(connectionString, { useNewUrlParser: true });
+        
+        return mongoose;
+    }
+
+}
+
+module.exports = new Config();

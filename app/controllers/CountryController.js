@@ -1,8 +1,15 @@
-class CountryController {
+/**
+ * Country Controller 
+ *
+ * Contains all API calls for countries
+ * 
+ */
+const Country = require('../models/Country');
+
+class CountryController extends Country {
     
     constructor() {
-        // Schema from model
-        this.CountryTable = Country.countryModel;
+        super();
     }
 
     /**
@@ -10,7 +17,7 @@ class CountryController {
      * @return json
      */
     getAll(req, res) {
-        this.CountryTable.find({}).then(eachOne => {
+        this.countryModel.find({}).then(eachOne => {
             res.json(eachOne);
         });
     }
@@ -20,7 +27,7 @@ class CountryController {
      * @return json
      */
     create(req, res) {
-        this.CountryTable.create({
+        this.countryModel.create({
             name: req.body.name
         }).then(country => {
             res.json(country)

@@ -1,9 +1,23 @@
-class UserController {
+/**
+ * User Controller 
+ *
+ * Contains all API calls for users
+ * 
+ */
+const User = require('../models/User');
+
+class UserController extends User {
 
     constructor() {
+        super();
 
-        // Schema from model
-        this.UserTable = User.userModel;
+        this.WebSocket = require('ws');
+        this.config = require('../config/Config');
+
+        /**
+         * All WebSockets in one object, with all current users.
+         */
+        this.WebSockets = {};
     }
 
     /**
@@ -20,7 +34,7 @@ class UserController {
      * @return json
      */
     getAll(req, res) {
-        this.UserTable.find({}).then(eachOne => {
+        this.userModel.find({}).then(eachOne => {
             res.json(eachOne);
         });
     }
@@ -30,7 +44,7 @@ class UserController {
      * @return json
      */
     create(req, res) {
-        this.UserTable.create({
+        this.userModel.create({
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
@@ -46,7 +60,7 @@ class UserController {
      */
     getAllLoggedUsers(req, res) {
 
-        const users = Object.entries(WebSockets);
+        const users = Object.entries(this.WebSockets);
         const currentUsers = [];
         users.map((value, key, a) =>
             currentUsers.push(value[1].user)
@@ -61,28 +75,33 @@ class UserController {
      * @return json
      */
     loginUser(req, res) {
+        const self = this;
         if (req.body.email && req.body.password) {
-            User.authenticate(req.body.email, req.body.password, function(error, user) {
+            this.authenticate(req.body.email, req.body.password, function(error, user) {
                 if (error || !user) {
                     // Wrong credentials
                     let err = new Error('Wrong email or password.');
                     err.status = 401;
-                    return next(err);
+                    res.json(err);
                 } else {
 
                     // Successful login
                     req.session.userId = user._id;
                     res.json('logged with user id: ' + req.session.userId);
 
-                    const ws = new WebSocket('ws://' + config.db.host + ':' + config.websocket.port);
+                    const ws = new self.WebSocket('ws://' + self.config.db.host + ':' + self.config.websocket.port);
 
                     // event emmited when connected
                     ws.onopen = function() {
                         // sending a send event to websocket server
                         ws.send('User with id: ' + user._id + ' connected');
 
-                        WebSockets[user._id] = ws;
-                        WebSockets[user._id]['user'] = user;
+                        // saving websocket in WebSockets object, inserting into
+                        // the object with user id as a key
+                        self.WebSockets[user._id] = ws;
+
+                        // inserting whole user info in WebSockets object
+                        self.WebSockets[user._id]['user'] = user;
                     }
 
                     // event emmited when receiving message
@@ -92,9 +111,8 @@ class UserController {
 
                     // event emmited when websocket is closed - on logout
                     ws.on('close', function(userId) {
-                        console.log(req.session.userId);
                         delete ws[req.session.userId];
-                        delete WebSockets[req.session.userId];
+                        delete self.WebSockets[req.session.userId];
 
                         // delete session object
                         req.session.destroy();
@@ -109,7 +127,10 @@ class UserController {
             err.status = 401;
             err = new Error('All fields required.');
             err.status = 400;
-            return next(err);
+            
+            res.json(err);
+
+
         }
     }
 
@@ -122,9 +143,11 @@ class UserController {
         if (req.session) {
             // destroy websocket for this specific user
             try {
-                WebSockets[req.session.userId].terminate();
+                this.WebSockets[req.session.userId].terminate();
+                console.log('User logged out.');
+                res.json('User logged out.');
             } catch (e) {
-                return res.redirect('/');
+                res.json('User not logged in.');
             }
         }
     }

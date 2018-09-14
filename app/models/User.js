@@ -1,13 +1,17 @@
-/**
- * User Model
- */
-class User {
-    constructor() {
+const Model = require('./Model');
 
-        /**
-         * Getting Schema for users
-         */
-        const Schema = mongoose.Schema;
+/**
+ * User model 
+ *
+ * Needed fields adding to Schema for mongo db.
+ * Also authentication in this class, for user login.
+ */
+class User extends Model {
+    constructor() {
+        super();
+        
+        // Getting Schema for users
+        const Schema = this.mongoose.Schema;
 
         const users = new Schema({
             email: {
@@ -34,7 +38,7 @@ class User {
 
         this.hashPass(users);
 
-        this.userModel = mongoose.model('User', users);
+        this.userModel = this.mongoose.model('User', users);
     }
 
     /**
@@ -42,6 +46,8 @@ class User {
      */
     authenticate(email, password, callback) {
         const User = this.userModel;
+        const bcrypt = this.bcrypt;
+
         User.findOne({ email: email })
             .exec(function(err, user) {
                 if (err) {
@@ -65,6 +71,8 @@ class User {
      * Hashing a password before saving it to the database
      */
     hashPass(users) {
+        const bcrypt = this.bcrypt;
+        
         users.pre('save', function(next) {
             let user = this;
             bcrypt.hash(user.password, 10, function(err, hash) {
@@ -79,4 +87,4 @@ class User {
 
 }
 
-module.exports = new User();
+module.exports = User;
