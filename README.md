@@ -22,7 +22,7 @@ Can be used as an API system, very fast, and compatible with React or Angular
 1. Install Node
 2. Install Mongo DB
 3. Run Mongo DB - command: mongod
-4. Run app/app.js - command: node app.js
-5. Check on http://127.0.0.1:8089/ if the app is working
+4. Run Start.js - command: node Start.js
+5. Check on http://127.0.0.1:8089/
 
 ---

@@ -51,6 +51,9 @@ class UserController extends User {
             passwordConf: req.body.passwordConf
         }).then(user => {
             res.json(user);
+        }).catch(function(e) {
+            console.log(e);
+            res.json(e);
         });
     }
 
@@ -127,7 +130,7 @@ class UserController extends User {
             err.status = 401;
             err = new Error('All fields required.');
             err.status = 400;
-            
+
             res.json(err);
 
 

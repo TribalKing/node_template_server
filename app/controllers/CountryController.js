@@ -31,6 +31,9 @@ class CountryController extends Country {
             name: req.body.name
         }).then(country => {
             res.json(country)
+        }).catch(function(e) {
+            console.log(e);
+            res.json(e);
         });
 
     }

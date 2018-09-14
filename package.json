@@ -1,0 +1,40 @@
+{
+  "name": "node_template",
+  "version": "1.0.0",
+  "description": "Node template server",
+  "main": "Start.js",
+  "dependencies": {
+    "bcrypt": "^3.0.0",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "glob": "^7.1.2",
+    "mongoose": "^5.2.8",
+    "request": "^2.88.0",
+    "ws": "^6.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TribalKing/node_template_server.git"
+  },
+  "keywords": [
+    "node",
+    "server",
+    "websockets",
+    "template",
+    "express"
+  ],
+  "author": "Uros Miric",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TribalKing/node_template_server/issues"
+  },
+  "homepage": "https://github.com/TribalKing/node_template_server#readme"
+}
