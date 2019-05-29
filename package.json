@@ -4,7 +4,7 @@
   "description": "Node template server",
   "main": "Start.js",
   "dependencies": {
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^3.0.6",
     "chai": "^4.1.2",
     "chai-http": "^4.2.0",
     "express": "^4.16.3",
