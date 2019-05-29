@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 node_modules
 build
 npm-debug.log
 .DS_Store
+=======
+node_modules/
+>>>>>>> a93cd6fe977187e67b9d2b010bba54250c73d28c
