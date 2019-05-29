@@ -5,19 +5,19 @@
  */
 class Config {
     constructor() {
-            this.app = {
-                port: 8089
-            };
+        this.app = {
+            port: 8089
+        };
 
-            this.websocket = {
-                port: 8088
-            };
+        this.websocket = {
+            port: 8088
+        };
 
-            this.db = {
-                host: 'localhost',
-                port: 27017,
-                name: 'db'
-            };
+        this.db = {
+            host: 'localhost',
+            port: 27017,
+            name: 'db'
+        };
     }
 
     /**
@@ -25,6 +25,9 @@ class Config {
      */
     Db() {
         const mongoose = require('mongoose');
+
+        // setting the mongodb to useCreateIndex instead of ensure to avoid deprecation message
+        mongoose.set('useCreateIndex', true);
 
         // connection to db
         const connectionString = `mongodb://${this.db.host}:${this.db.port}/${this.db.name}`;
