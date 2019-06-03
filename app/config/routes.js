@@ -14,12 +14,12 @@ class Route {
         const countries = require('../controllers/CountryController.js');
 
         // * Create a new country
-        this.app.post('/api/countries', function(req, res) {
+        this.app.post('/api/countries', (req, res) => {
             countries.create(req, res);
         });
 
         // * Get all countries
-        this.app.get('/api/countries', function(req, res) {
+        this.app.get('/api/countries', (req, res) => {
             countries.getAll(req, res);
         });
     };
@@ -31,34 +31,34 @@ class Route {
         const users = require('../controllers/UserController.js');
 
         // * Test if api is working
-        this.app.get('/', function(req, res) {
+        this.app.get('/', (req, res) => {
             users.test(req, res);
         });
 
         // * Get all users
-        this.app.get('/api/users', function(req, res) {
+        this.app.get('/api/users', (req, res) => {
             users.getAll(req, res);
         });
 
         // * Get all currently logged in users
-        this.app.get('/api/users/current', function(req, res) {
+        this.app.get('/api/users/current', (req, res) => {
             users.getAllLoggedUsers(req, res);
 
         });
 
         // * Create new user
-        this.app.post('/api/users', function(req, res) {
+        this.app.post('/api/users', (req, res) => {
             users.create(req, res);
         });
 
         // * Login user
-        this.app.post('/api/users/login', function(req, res, next) {
+        this.app.post('/api/users/login', (req, res, next) => {
             console.log(req.body);
             users.loginUser(req, res);
         });
 
         // * Logout user
-        this.app.get('/api/users/logout', function(req, res, next) {
+        this.app.get('/api/users/logout', (req, res, next) => {
             users.logoutUser(req, res);
         });
 
