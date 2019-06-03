@@ -5,17 +5,17 @@
   "main": "Start.js",
   "dependencies": {
     "bcrypt": "^3.0.6",
-    "chai": "^4.1.2",
-    "chai-http": "^4.2.0",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "glob": "^7.1.2",
-    "mongoose": "^5.2.8",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.1",
+    "glob": "^7.1.4",
+    "mongoose": "^5.5.12",
     "request": "^2.88.0",
-    "ws": "^6.0.0"
+    "ws": "^7.0.0"
   },
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "mocha": "^6.1.4"
   },
   "scripts": {
     "test": "mocha"
