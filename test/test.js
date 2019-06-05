@@ -4,9 +4,9 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const request = require('request');
 const assert = require('assert');
-const config = require('../app/config/Config');
+const config = require('config');
 
-const serverPath = 'http://' + config.db.host + ':' + config.app.port;
+const serverPath = 'http://' + config.get('db.host') + ':' + config.get('db.port');
 
 
 describe('API Calls', function() {
