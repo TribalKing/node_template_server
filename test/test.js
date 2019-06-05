@@ -6,7 +6,7 @@ const request = require('request');
 const assert = require('assert');
 const config = require('config');
 
-const serverPath = 'http://' + config.get('db.host') + ':' + config.get('db.port');
+const serverPath = 'http://' + config.get('db.host') + ':' + config.get('port');
 
 
 describe('API Calls', function() {
