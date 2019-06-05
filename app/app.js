@@ -7,10 +7,10 @@
 class App {
     constructor() {
         const express = require('express');
+        this.config = require('config');
 
         this.app = module.exports = express();
 
-        this.config = require('./config/Config');
 
         /**
          * Dependencies - Including all dependencies needed for app
@@ -31,7 +31,7 @@ class App {
     	const WebSocket = require('./WebSocket.js');
     	WebSocket.Server();
 
-        this.app.listen(this.config.app.port);
+        this.app.listen(this.config.get(`port`));
 
     }
 
@@ -42,7 +42,7 @@ class App {
     	/**
     	 * Routes for controllers
     	 */
-    	const routes = require('./config/Routes.js');
+    	const routes = require('./routes/Routes.js');
     }
 
     Dependencies() {

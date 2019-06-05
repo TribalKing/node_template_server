@@ -1,0 +1,9 @@
+{
+    "port" : 8089,
+    "websocket" : 8088,
+    "db" : {
+        "host" : "localhost",
+        "port" : 27017,
+        "name" : "db"
+    }
+}

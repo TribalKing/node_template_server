@@ -5,16 +5,15 @@
  */
 class Model {
     constructor() {
-        const config = require('../config/Config');
+        const db = require('../db/connection');
 
-        this.mongoose = config.Db();
+        this.mongoose = db.startMongo();
 
         /**
          * Including models globally
          */
         this.User    = require('./User.js');
         this.Country = require('./Country.js');
-
 
         /**
          * Bcrypt - For hashing a password

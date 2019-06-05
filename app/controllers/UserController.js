@@ -12,7 +12,7 @@ class UserController extends User {
         super();
 
         this.WebSocket = require('ws');
-        this.config = require('../config/Config');
+        this.config = require('config');
 
         /**
          * All WebSockets in one object, with all current users.
@@ -92,7 +92,7 @@ class UserController extends User {
                     req.session.userId = user._id;
                     res.json('logged with user id: ' + req.session.userId);
 
-                    const ws = new self.WebSocket('ws://' + self.config.db.host + ':' + self.config.websocket.port);
+                    const ws = new self.WebSocket('ws://' + self.config.get('db.host') + ':' + self.config.get('db.websocket'));
 
                     // event emmited when connected
                     ws.onopen = function() {

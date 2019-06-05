@@ -6,8 +6,7 @@
 class WebSocket {
 
     constructor() {
-        this.config = require('./config/Config');
-
+        this.config = require('config');
     }
 
     /**
@@ -17,7 +16,7 @@ class WebSocket {
         const WebSocket = require('ws');
 
         const wss = new WebSocket.Server({
-            port: this.config.websocket.port,
+            port: this.config.get('websocket'),
             perMessageDeflate: {
                 zlibDeflateOptions: { // See zlib defaults.
                     chunkSize: 1024,
