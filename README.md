@@ -1,6 +1,6 @@
 ## Node Server Template
 
-Can be used as an API system, very fast, and compatible with React or Angular
+Can be used as an API system, very fast, and compatible with any modern front end framework
 
 ## Packages
 
