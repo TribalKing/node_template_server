@@ -11,7 +11,6 @@ class App {
 
         this.app = module.exports = express();
 
-
         /**
          * Dependencies - Including all dependencies needed for app
          */

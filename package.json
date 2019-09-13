@@ -7,17 +7,17 @@
     "bcrypt": "^3.0.6",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "config": "^3.1.0",
+    "config": "^3.2.2",
     "express": "^4.17.1",
-    "express-session": "^1.16.1",
+    "express-session": "^1.16.2",
     "glob": "^7.1.4",
     "moment": "^2.24.0",
-    "mongoose": "^5.5.12",
+    "mongoose": "^5.7.1",
     "request": "^2.88.0",
-    "ws": "^7.0.0"
+    "ws": "^7.1.2"
   },
   "devDependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^6.2.0"
   },
   "scripts": {
     "test": "mocha"

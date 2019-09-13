@@ -14,6 +14,7 @@ class Connection {
 
         // setting the mongodb to useCreateIndex instead of ensure to avoid deprecation message
         mongoose.set('useCreateIndex', true);
+        mongoose.set('useUnifiedTopology', true);
 
         // checking if already connected to MongoDB
         if(mongoose.connection.readyState === 0) {
