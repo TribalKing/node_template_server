@@ -1,8 +1,8 @@
 /**
- * User Controller 
+ * User Controller
  *
  * Contains all API calls for users
- * 
+ *
  */
 const User = require('../models/User');
 
@@ -26,7 +26,6 @@ class UserController extends User {
      */
     test(req, res) {
         res.json('Success! API is working!');
-
     }
 
     /**
@@ -37,6 +36,77 @@ class UserController extends User {
         this.userModel.find({}).then(eachOne => {
             res.json(eachOne);
         });
+    }
+
+    /**
+     * Get currently logged user
+     * @return json
+     */
+    getMe(req, res) {
+        const me = this.userModel.find({ _id : req.session.userId });
+
+        me.exec().then((user) => {
+            res.json(user);
+        }).catch(function (e) {
+            console.log(e);
+            res.json(e);
+        });
+    }
+
+    /**
+     * Increment likes on user
+     * @return json
+     */
+    likeUser(req, res) {
+        const user = this.getById(req.params.id);
+
+        user.then((likedUser) => {
+            const user = this.userModel.updateOne({ username : 'test' }, {
+                likes : likedUser[0].likes + 1
+            });
+
+            user.exec().then((done) => {
+                res.json(done);
+            }).catch(function (e) {
+                console.log(e);
+                res.json(e);
+            });
+        });
+
+    }
+
+    /**
+     * Increment likes on user
+     * @return json
+     */
+    unlikeUser(req, res) {
+        const user = this.getById(req.params.id);
+
+        user.then((likedUser) => {
+            const user = this.userModel.updateOne({ username : 'test' }, {
+                likes : likedUser[0].likes - 1
+            });
+
+            user.exec().then((done) => {
+                res.json(done);
+            }).catch(function (e) {
+                console.log(e);
+                res.json(e);
+            });
+        });
+
+    }
+
+    /**
+     * Get users sorted by most liked
+     * @return json
+     */
+    mostLikedUsers(req, res) {
+        this.userModel.find({}).then(eachOne => {
+            eachOne.sort((a, b) => parseFloat(b.likes) - parseFloat(a.likes));
+            res.json(eachOne);
+        });
+
     }
 
     /**
@@ -51,7 +121,7 @@ class UserController extends User {
             passwordConf: req.body.passwordConf
         }).then(user => {
             res.json(user);
-        }).catch(function(e) {
+        }).catch(function (e) {
             console.log(e);
             res.json(e);
         });
@@ -80,7 +150,7 @@ class UserController extends User {
     loginUser(req, res) {
         const self = this;
         if (req.body.email && req.body.password) {
-            this.authenticate(req.body.email, req.body.password, function(error, user) {
+            this.authenticate(req.body.email, req.body.password, function (error, user) {
                 if (error || !user) {
                     // Wrong credentials
                     let err = new Error('Wrong email or password.');
@@ -92,10 +162,10 @@ class UserController extends User {
                     req.session.userId = user._id;
                     res.json('logged with user id: ' + req.session.userId);
 
-                    const ws = new self.WebSocket('ws://' + self.config.get('db.host') + ':' + self.config.get('db.websocket'));
+                    const ws = new self.WebSocket('ws://' + self.config.get('db.host') + ':' + self.config.get('websocket'));
 
                     // event emmited when connected
-                    ws.onopen = function() {
+                    ws.onopen = function () {
                         // sending a send event to websocket server
                         ws.send('User with id: ' + user._id + ' connected');
 
@@ -108,12 +178,12 @@ class UserController extends User {
                     }
 
                     // event emmited when receiving message
-                    ws.on('message', function() {
+                    ws.on('message', function () {
                         console.log(message);
                     });
 
                     // event emmited when websocket is closed - on logout
-                    ws.on('close', function(userId) {
+                    ws.on('close', function (userId) {
                         delete ws[req.session.userId];
                         delete self.WebSockets[req.session.userId];
 
@@ -153,6 +223,10 @@ class UserController extends User {
                 res.json('User not logged in.');
             }
         }
+    }
+
+    async getById(id) {
+        return this.userModel.find({ _id : id });
     }
 
 }

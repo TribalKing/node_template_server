@@ -62,6 +62,26 @@ class Route {
             users.logoutUser(req, res);
         });
 
+        // * Current user
+        this.app.get('/api/me', (req, res, next) => {
+            users.getMe(req, res);
+        });
+
+        // * Like User
+        this.app.get('/api/:id/like', (req, res, next) => {
+            users.likeUser(req, res);
+        });
+
+        // * Unlike User
+        this.app.get('/api/:id/unlike', (req, res, next) => {
+            users.unlikeUser(req, res);
+        });
+
+        // * Get most liked users
+        this.app.get('/api/most-liked', (req, res, next) => {
+            users.mostLikedUsers(req, res);
+        });
+
     };
 }
 

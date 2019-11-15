@@ -26,6 +26,27 @@ describe('API Calls', function() {
             });
         });
 
+        it('Most Liked Users', function(done) {
+            request(serverPath + '/api/most-liked', function(error, response, body) {
+                expect(response.statusCode).to.equal(200);
+                done();
+            });
+        });
+
+        it('Like', function(done) {
+            request(serverPath + '/api/53cf12234b132219ad7aa129/like', function(error, response, body) {
+                expect(response.statusCode).to.equal(200);
+                done();
+            });
+        });
+
+        it('Unlike', function(done) {
+            request(serverPath + '/api/53cf12234b132219ad7aa129/unlike', function(error, response, body) {
+                expect(response.statusCode).to.equal(200);
+                done();
+            });
+        });
+
         it('Create a new user', function(done) {
             chai.request(serverPath)
                 .post('/api/users')

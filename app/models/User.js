@@ -34,6 +34,9 @@ class User extends Model {
                 type: String,
                 required: true
             },
+            likes: {
+                type: Number
+            },
         });
 
         this.hashPass(users);
