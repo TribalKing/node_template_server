@@ -29,14 +29,23 @@ Can be used as an API system, very fast, and compatible with any modern front en
 
 ## All Endpoints
 /api/users GET - Getting all users
+
 /api/users POST - Creating a new user
+
 /api/users/current GET - Get all currently logged users
+
 /api/users/login POST - Login user
+
 /api/users/logout GET - Logout currently logged user
+
 /api/me GET - Get currently logged user
+
 /api/:id/like GET - Like a user
+
 /api/:id/unlike GET - Unlike a user
+
 /api/most-liked GET - Get list of all liked users sorted from largest to smallest
 
 /api/countries GET - Get all countries
+
 /api/countries POST - Add new country
